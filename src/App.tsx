@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import ProductEditor from "./components/ParamEditor";
 
-function App() {
+const App: React.FC = () => {
+  const initialParams: any = [
+    { id: 1, name: "Назначение", type: "string" },
+    { id: 2, name: "Длина", type: "string" },
+  ];
+
+  const initialModel = {
+    paramValues: [
+      { paramId: 1, value: "повседневное" },
+      { paramId: 2, value: "макси" },
+    ],
+  };
+
+  const [model, setModel] = useState(initialModel);
+
+  const handleUpdateModel = (updatedModel: any) => {
+    setModel(updatedModel);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Редактор параметров</h1>
+      <ProductEditor
+        params={initialParams}
+        initialModel={model}
+        onUpdateModel={handleUpdateModel}
+      />
     </div>
   );
-}
+};
 
 export default App;
